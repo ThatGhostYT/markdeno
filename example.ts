@@ -3,7 +3,7 @@ import {writeMarkdown} from "./mod.ts";
 writeMarkdown("mod.ts","README.md",{
     additionalInfo: {
         title: "MarkDeno",
-        content: `[![ci](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml)
+        content: `[![ci](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml/badge.svg)](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml)
         
 MarkDeno is a library that turns your code into markdown documentation.
         
