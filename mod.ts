@@ -111,7 +111,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
             case "example": {
                 if(/```.*?\n(?:.|\n)+\n```/g.test(tag.doc)){
-                    res += `\n> @example\n> ${tag.doc}\n`;
+                    res += `\n> @example\n${tag.doc}\n`;
                 } else{
                     res += `\n> @example\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\``
                 }
