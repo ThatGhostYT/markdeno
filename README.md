@@ -4,6 +4,12 @@ MarkDeno is a library that turns your code into markdown documentation.
         
 > **MarkDeno is a work in progress, so be patient as new tags and kinds are added.**
 
+```ts
+import * as MarkDeno from "https://deno.land/x/markdeno/mod.ts";
+
+MarkDeno.writeMarkdown("input.ts","output.md");
+```
+
 ### Supported JSDoc Tags (more coming soon)
 > **1.** `param`
 > **2.** `example`
@@ -22,8 +28,6 @@ Returns a parsed version of the json object returned by `deno doc --json`
 const json = await MarkDeno.getDocumentationJSON("file.ts");
 ```
 
-Declared at: `mod.ts:39:0`
-
 async function **getDocumentationJSONString**(**input**: *string*)
 
 Returns an unparsed version of the json object returned by `deno doc --json`
@@ -33,8 +37,6 @@ Returns an unparsed version of the json object returned by `deno doc --json`
 const json = await MarkDeno.getDocumentationJSONString("file.ts");
 ```
 
-Declared at: `mod.ts:56:0`
-
 async function **getDenoDocResult**(**input**: *string*)
 
 Returns the result of `deno doc` without color. Note that `deno doc` does NOT return markdown.
@@ -43,8 +45,6 @@ Returns the result of `deno doc` without color. Note that `deno doc` does NOT re
 ```ts
 console.log(await MarkDeno.getDenoDocResult("file.ts"));
 ```
-
-Declared at: `mod.ts:71:0`
 
 async function **writeMarkdown**(**input**: *string*,**output**: *string*,**config**?: *Config*)
 
@@ -56,7 +56,5 @@ Analyzes an input file and writes to a specified output file.
 ```ts
 MarkDeno.writeMarkdown("file.ts","output.md");
 ```
-
-Declared at: `mod.ts:88:0`
 
 > **Documentation Generated with MarkDeno.**

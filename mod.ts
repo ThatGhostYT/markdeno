@@ -91,7 +91,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
     const s = input.split(".");
     
     const con = {
-        displayOrigin: config?.displayOrigin || true,
+        displayOrigin: config?.displayOrigin ?? true,
         additionalInfo: {
             content: config?.additionalInfo?.content || "",
             placement: config?.additionalInfo?.placement || "start",
