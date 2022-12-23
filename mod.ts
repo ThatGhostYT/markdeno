@@ -189,6 +189,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                     res += elem.kind === "keyValue" ? elem.key : "";
                     if(param.props.length !== inc) res += ", ";
                 }
+                res += "}";
             }
         }
         return res;
@@ -232,7 +233,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                     if(i.interfaceDef.extends.length !== inc) code += ",";
                 }
 
-                code += "{\n"
+                code += "\n"
 
                 inc = 0;
                 for(const method of i.interfaceDef.methods){
@@ -280,7 +281,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                     if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n\n";
                 }
 
-                code += "\n}";
+                code += "\n";
                 break;
             }
 
