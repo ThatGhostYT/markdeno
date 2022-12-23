@@ -2,12 +2,12 @@ import * as denoDoc from "https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts";
 
 export interface Config{
     /**
-     * Show the line and collumn where the declaration of the item can be found. Default: true.
+     * Show the line and column where the declaration of the item can be found. Default: true.
      */
     displayOrigin?: boolean;
 
     /**
-     * Additional info to add to teh beginning or end of the markdown file.
+     * Additional info to add to the beginning or end of the markdown file.
      */
     additionalInfo?: {
         /**
