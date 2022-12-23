@@ -30,6 +30,11 @@ export interface Config{
      * Default language for code blocks. If not provided, then it will be the language of the file being documented. Default: File Extension.
      */
     defaultLanguage?: string;
+
+    /**
+     * Whether to automatically amplify new lines or not.
+     */
+    amplifyNewlines?: boolean;
 }
 
 /**
@@ -118,7 +123,8 @@ export async function writeMarkdown(input: string,output: string,config?: Config
             placement: config?.additionalInfo?.placement || "start",
             title: config?.additionalInfo?.title || "Additional Info"
         },
-        defaultLanguage: config?.defaultLanguage || s[s.length - 1]
+        defaultLanguage: config?.defaultLanguage || s[s.length - 1],
+        amplifyNewlines: config?.amplifyNewlines ?? true
     }
 
     function parseJSDOC(tag: denoDoc.JsDocTag){
@@ -307,5 +313,9 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
     code += "\n\n> **Documentation Generated with MarkDeno.**"
 
-    Deno.writeFile(output,new TextEncoder().encode(amplifyNewlines(code)));
+    Deno.writeFile(output,new TextEncoder().encode(
+        con.amplifyNewlines
+            ? amplifyNewlines(code)
+            : code
+    ));
 }
