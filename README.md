@@ -38,7 +38,7 @@ MarkDeno.writeMarkdown("input.ts","output.md");
 
 ## Documentation
 
-interface **Config**{
+interface **Config**
 
 	**displayOrigin**: *boolean*
 
@@ -58,7 +58,11 @@ interface **Config**{
 
 	Declared at: `mod.ts:3:0`
 
-}
+	**amplifyNewlines**: *boolean*
+
+	Whether to automatically amplify new lines or not.
+
+	Declared at: `mod.ts:3:0`
 
 Declared at: `mod.ts:3:0`
 
@@ -78,7 +82,7 @@ const json = await MarkDeno.getDocumentationJSON("file.ts");
 
 ```
 
-Declared at: `mod.ts:42:0`
+Declared at: `mod.ts:47:0`
 
 async function **getDocumentationJSONString**(**input**: *string*)
 
@@ -96,7 +100,7 @@ const json = await MarkDeno.getDocumentationJSONString("file.ts");
 
 ```
 
-Declared at: `mod.ts:60:0`
+Declared at: `mod.ts:65:0`
 
 async function **getDenoDocResult**(**input**: *string*)
 
@@ -114,7 +118,7 @@ console.log(await MarkDeno.getDenoDocResult("file.ts"));
 
 ```
 
-Declared at: `mod.ts:76:0`
+Declared at: `mod.ts:81:0`
 
 function **amplifyNewlines**(**markdown**: *string*)
 
@@ -138,7 +142,7 @@ Deno.writeFile("output.md",amplifyNewlines(`## Amplified Newlines
 
 ```
 
-Declared at: `mod.ts:96:0`
+Declared at: `mod.ts:101:0`
 
 async function **writeMarkdown**(**input**: *string*,**output**: *string*,**config**?: *Config*)
 
@@ -160,7 +164,7 @@ MarkDeno.writeMarkdown("file.ts","output.md");
 
 ```
 
-Declared at: `mod.ts:109:0`
+Declared at: `mod.ts:114:0`
 
 import "[**https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts**](https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts)"
 
