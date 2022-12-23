@@ -1,9 +1,9 @@
-import {writeMarkdown} from "./mod.ts";
+import {writeMarkdown,amplifyNewlines} from "./mod.ts";
 
 writeMarkdown("mod.ts","README.md",{
     additionalInfo: {
         title: "MarkDeno",
-        content: `[![ci](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml/badge.svg)](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml)
+        content: amplifyNewlines(`[![ci](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml/badge.svg)](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml)
         
 MarkDeno is a library that turns your code into markdown documentation.
         
@@ -18,9 +18,12 @@ MarkDeno.writeMarkdown("input.ts","output.md");
 ### Supported JSDoc Tags (more coming soon)
 > **1.** \`param\`
 > **2.** \`example\`
+> **3.** \`returns\`
 
 ### Supported Kinds (more coming soon)
-> **1.** \`function\``
-    },
-    displayOrigin: false
+> **1.** \`function\`
+> **2.** \`interface\`
+> **3.** \`variable\`
+> **4.** \`import\``)
+    }
 });
