@@ -131,26 +131,26 @@ export async function writeMarkdown(input: string,output: string,config?: Config
         let res = "";
         switch(tag.kind){
             case "param": {
-                res += `\n> @param ${tag.type ? `{*${tag.type}*} ` : ""}**${tag.name}**${tag.doc !== undefined ? ` *${tag.doc}*` : ""}`;
+                res += `\n> \\@param ${tag.type ? `{*${tag.type}*} ` : ""}**${tag.name}**${tag.doc !== undefined ? ` *${tag.doc}*` : ""}`;
                 break;
             }
 
             case "example": {
                 if(/```.*?\n(?:.|\n)+\n```/g.test(tag.doc!)){
-                    res += `\n> @example\n${tag.doc}\n`;
+                    res += `\n> \\@example\n${tag.doc}\n`;
                 } else{
-                    res += `\n> @example\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\``
+                    res += `\n> \\@example\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\``
                 }
                 break;
             }
 
             case "return": {
-                res += `\n> @returns ${tag.type ? `{*${tag.type}*} ` : ""}${tag.doc ? ` *${tag.doc}*` : ""}`;
+                res += `\n> \\@returns ${tag.type ? `{*${tag.type}*} ` : ""}${tag.doc ? ` *${tag.doc}*` : ""}`;
                 break;
             }
 
             default: {
-                res += `\n> @${tag.kind}`;
+                res += `\n> \\@${tag.kind}`;
             }
         }
         return res;
