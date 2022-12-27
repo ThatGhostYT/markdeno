@@ -84,7 +84,7 @@ export async function getDenoDocResult(input: string){
         stdout: "piped"
     });
 
-    return (new TextDecoder().decode(await p.output())).replace(/\[[0-9]*(?:;[0-9]+)*?m/g,"");
+    return (new TextDecoder().decode(await p.output())).replace(/\[[0-9]+(?:;[0-9]+)*?m/g,"");
 }
 
 /**
@@ -137,15 +137,15 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
             case "example": {
                 if(/```.*?\n(?:.|\n)+\n```/g.test(tag.doc!)){
-                    res += `\n> @ example\n${tag.doc}\n`;
+                    res += `\n> @ example\n\n${tag.doc}\n\n`;
                 } else{
-                    res += `\n> @ example\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\``
+                    res += `\n> @ example\n\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\`\n`
                 }
                 break;
             }
 
             case "return": {
-                res += `\n> @ returns ${tag.type ? `{*${tag.type}*} ` : ""}${tag.doc ? ` *${tag.doc}*` : ""}`;
+                res += `\n> @ returns ${tag.type ? `{*${tag.type}*}` : ""}${tag.doc ? ` *${tag.doc}*` : ""}`;
                 break;
             }
 
@@ -253,15 +253,15 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
                     code += ")";
 
-                    if("jsDoc" in method && "doc" in method.jsDoc!) code += "\n\n\t" + method.jsDoc.doc;
+                    if("jsDoc" in method && "doc" in method.jsDoc!) code += "\n\n" + method.jsDoc.doc;
                 
                     if("jsDoc" in method && "tags" in method.jsDoc! && method.jsDoc.tags!.length > 0){
                         for(const tag of method.jsDoc.tags!){
-                            code += "\t" + parseJSDOC(tag);
+                            code += parseJSDOC(tag);
                         }
                     }
 
-                    if(con.displayOrigin) code += `\n\n\tDeclared at: \`${input}:${i.location.line}:${i.location.col}\``;
+                    if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
                     if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n\n";
                 }
 
@@ -269,15 +269,15 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                     inc++;
                     code += `- **${property.name}**: *${property.tsType?.repr || property.tsType?.kind}*`;
 
-                    if("jsDoc" in property && "doc" in property.jsDoc!) code += "\n\n\t" + property.jsDoc.doc;
+                    if("jsDoc" in property && "doc" in property.jsDoc!) code += "\n\n" + property.jsDoc.doc;
                 
                     if("jsDoc" in property && "tags" in property.jsDoc! && property.jsDoc.tags!.length > 0){
                         for(const tag of property.jsDoc.tags!){
-                            code += "\t" + parseJSDOC(tag);
+                            code += parseJSDOC(tag);
                         }
                     }
 
-                    if(con.displayOrigin) code += `\n\n\tDeclared at: \`${input}:${i.location.line}:${i.location.col}\``;
+                    if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
                     if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n\n";
                 }
 
@@ -303,12 +303,12 @@ export async function writeMarkdown(input: string,output: string,config?: Config
             }
         }
 
-        if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\``;
+        if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
         if(json.length !== increment) code += "\n\n";
     }
 
     if(con.additionalInfo.content){
-        if(con.additionalInfo.placement === "start") code = `${"## " + con.additionalInfo.title}\n\n${con.additionalInfo.content}\n\n${code}`;
+        if(con.additionalInfo.placement === "start") code = `${"# " + con.additionalInfo.title}\n\n${con.additionalInfo.content}\n\n${code}`;
         else code += `\n\n${"## " + con.additionalInfo.title}\n\n${con.additionalInfo.content}`;
     }
 
@@ -316,7 +316,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
     Deno.writeFile(output,new TextEncoder().encode(
         con.amplifyNewlines
-            ? amplifyNewlines(code)
-            : code
+            ? amplifyNewlines(code + "\n")
+            : code + "\n"
     ));
 }
