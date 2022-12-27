@@ -99,7 +99,7 @@ export async function getDenoDocResult(input: string){
  * `));
  */
 export function amplifyNewlines(markdown: string){
-    return markdown.replace(/\n+/g,"\n\n");
+    return markdown.replace(/\n+/g,"  \n");
 }
 
 /**
