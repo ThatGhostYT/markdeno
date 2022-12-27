@@ -40,25 +40,25 @@ MarkDeno.writeMarkdown("input.ts","output.md");
 
 interface **Config**
 
-	**displayOrigin**: *boolean*
+- **displayOrigin**: *boolean*
 
 	Show the line and column where the declaration of the item can be found. Default: true.
 
 	Declared at: `mod.ts:3:0`
 
-	**additionalInfo**: *typeLiteral*
+- **additionalInfo**: *typeLiteral*
 
 	Additional info to add to the beginning or end of the markdown file.
 
 	Declared at: `mod.ts:3:0`
 
-	**defaultLanguage**: *string*
+- **defaultLanguage**: *string*
 
 	Default language for code blocks. If not provided, then it will be the language of the file being documented. Default: File Extension.
 
 	Declared at: `mod.ts:3:0`
 
-	**amplifyNewlines**: *boolean*
+- **amplifyNewlines**: *boolean*
 
 	Whether to automatically amplify new lines or not.
 
@@ -70,11 +70,11 @@ async function **getDocumentationJSON**(**input**: *string*)
 
 Returns a parsed version of the json object returned by `deno doc --json`
 
-> \@param {*string*} **input** *File to document.*
+> @ param {*string*} **input** *File to document.*
 
-> \@returns {*Promise<denoDoc.DocNode[]>*} 
+> @ returns {*Promise<denoDoc.DocNode[]>*} 
 
-> \@example
+> @ example
 
 ```ts
 
@@ -88,11 +88,11 @@ async function **getDocumentationJSONString**(**input**: *string*)
 
 Returns an unparsed version of the json object returned by `deno doc --json`
 
-> \@param {*string*} **input** *File to document.*
+> @ param {*string*} **input** *File to document.*
 
-> \@returns {*Promise<string>*} 
+> @ returns {*Promise<string>*} 
 
-> \@example
+> @ example
 
 ```ts
 
@@ -106,11 +106,11 @@ async function **getDenoDocResult**(**input**: *string*)
 
 Returns the result of `deno doc` without color. Note that `deno doc` does NOT return markdown.
 
-> \@param {*string*} **input** *File to document.*
+> @ param {*string*} **input** *File to document.*
 
-> \@returns {*Promise<string>*} 
+> @ returns {*Promise<string>*} 
 
-> \@example
+> @ example
 
 ```ts
 
@@ -124,11 +124,11 @@ function **amplifyNewlines**(**markdown**: *string*)
 
 Amplifies new lines so that no new lines are ignored.
 
-> \@param {*string*} **markdown** *Markdown to amplify new lines in.*
+> @ param {*string*} **markdown** *Markdown to amplify new lines in.*
 
-> \@returns {*string*} 
+> @ returns {*string*} 
 
-> \@example
+> @ example
 
 ```ts
 
@@ -148,15 +148,15 @@ async function **writeMarkdown**(**input**: *string*,**output**: *string*,**conf
 
 Analyzes an input file and writes to a specified output file.
 
-> \@param {*string*} **input** *Input file to analyze.*
+> @ param {*string*} **input** *Input file to analyze.*
 
-> \@param {*string*} **out** *Output file to write markdown too.*
+> @ param {*string*} **out** *Output file to write markdown too.*
 
-> \@param {*Config*} **config** *Optional configurations for the parser.*
+> @ param {*Config*} **config** *Optional configurations for the parser.*
 
-> \@returns {*Promise<void>*} 
+> @ returns {*Promise<void>*} 
 
-> \@example
+> @ example
 
 ```ts
 
@@ -166,7 +166,7 @@ MarkDeno.writeMarkdown("file.ts","output.md");
 
 Declared at: `mod.ts:114:0`
 
-import "[**https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts**](https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts)"
+import [**https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts**](https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts)
 
 Declared at: `mod.ts:1:0`
 

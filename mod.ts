@@ -131,26 +131,26 @@ export async function writeMarkdown(input: string,output: string,config?: Config
         let res = "";
         switch(tag.kind){
             case "param": {
-                res += `\n> \\@param ${tag.type ? `{*${tag.type}*} ` : ""}**${tag.name}**${tag.doc !== undefined ? ` *${tag.doc}*` : ""}`;
+                res += `\n> @ param ${tag.type ? `{*${tag.type}*} ` : ""}**${tag.name}**${tag.doc !== undefined ? ` *${tag.doc}*` : ""}`;
                 break;
             }
 
             case "example": {
                 if(/```.*?\n(?:.|\n)+\n```/g.test(tag.doc!)){
-                    res += `\n> \\@example\n${tag.doc}\n`;
+                    res += `\n> @ example\n${tag.doc}\n`;
                 } else{
-                    res += `\n> \\@example\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\``
+                    res += `\n> @ example\n\`\`\`${con.defaultLanguage}\n${tag.doc}\n\`\`\``
                 }
                 break;
             }
 
             case "return": {
-                res += `\n> \\@returns ${tag.type ? `{*${tag.type}*} ` : ""}${tag.doc ? ` *${tag.doc}*` : ""}`;
+                res += `\n> @ returns ${tag.type ? `{*${tag.type}*} ` : ""}${tag.doc ? ` *${tag.doc}*` : ""}`;
                 break;
             }
 
             default: {
-                res += `\n> \\@${tag.kind}`;
+                res += `\n> @ ${tag.kind}`;
             }
         }
         return res;
@@ -238,7 +238,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                 inc = 0;
                 for(const method of i.interfaceDef.methods){
                     inc++;
-                    code += "\t";
+                    code += "- ";
                     if(method.kind === "getter") code += "*get*";
                     else if(method.kind === "setter") code += "*set*";
 
@@ -267,7 +267,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
                 for(const property of i.interfaceDef.properties){
                     inc++;
-                    code += `\t**${property.name}**: *${property.tsType?.repr || property.tsType?.kind}*`;
+                    code += `- **${property.name}**: *${property.tsType?.repr || property.tsType?.kind}*`;
 
                     if("jsDoc" in property && "doc" in property.jsDoc!) code += "\n\n\t" + property.jsDoc.doc;
                 
@@ -299,7 +299,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
             }
 
             case "import": {
-                code += `import "[**${i.importDef.src}**](${i.importDef.src})"`
+                code += `import [**${i.importDef.src}**](${i.importDef.src})`;
             }
         }
 
