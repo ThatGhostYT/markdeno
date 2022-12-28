@@ -26,8 +26,8 @@ Declared at: `mod.ts:3:0`
 - **defaultLanguage**: *string*  
 Default language for code blocks. If not provided, then it will be the language of the file being documented. Default: File Extension.  
 Declared at: `mod.ts:3:0`  
-- **amplifyNewlines**: *boolean*  
-Whether to automatically amplify new lines or not.  
+- **hardenNewlines**: *boolean*  
+Whether to automatically harden new lines or not.  
 Declared at: `mod.ts:3:0`  
 Declared at: `mod.ts:3:0`  
 async function **getDocumentationJSON**(**input**: *string*)  
@@ -57,13 +57,13 @@ Returns the result of `deno doc` without color. Note that `deno doc` does NOT re
 console.log(await MarkDeno.getDenoDocResult("file.ts"));  
 ```  
 Declared at: `mod.ts:81:0`  
-function **amplifyNewlines**(**markdown**: *string*)  
+function **hardenNewlines**(**markdown**: *string*)  
 Amplifies new lines so that no new lines are ignored.  
 > @ param {*string*} **markdown** *Markdown to amplify new lines in.*  
 > @ returns {*string*}  
 > @ example  
 ```ts  
-Deno.writeFile("output.md",amplifyNewlines(`## Amplified Newlines  
+Deno.writeFile("output.md",hardenNewlines(`## Amplified Newlines  
 > Amplifies new lines.  
 > So that **none** of them are ignored.  
 `));  
@@ -82,4 +82,4 @@ MarkDeno.writeMarkdown("file.ts","output.md");
 Declared at: `mod.ts:114:0`  
 import [**https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts**](https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts)  
 Declared at: `mod.ts:1:0`  
-> **Documentation Generated with MarkDeno.**  
+> **Documentation Generated with [MarkDeno](https://deno.land/x/markdeno).**  

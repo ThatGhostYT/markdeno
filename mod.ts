@@ -32,9 +32,9 @@ export interface Config{
     defaultLanguage?: string;
 
     /**
-     * Whether to automatically amplify new lines or not.
+     * Whether to automatically harden new lines or not.
      */
-    amplifyNewlines?: boolean;
+    hardenNewlines?: boolean;
 }
 
 /**
@@ -92,13 +92,13 @@ export async function getDenoDocResult(input: string){
  * @param {string} markdown Markdown to amplify new lines in.
  * @returns {string}
  * @example
- * Deno.writeFile("output.md",amplifyNewlines(`## Amplified Newlines
+ * Deno.writeFile("output.md",hardenNewlines(`## Amplified Newlines
  * 
  * > Amplifies new lines.
  * > So that **none** of them are ignored.
  * `));
  */
-export function amplifyNewlines(markdown: string){
+export function hardenNewlines(markdown: string){
     return markdown.replace(/\n+/g,"  \n");
 }
 
@@ -124,7 +124,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
             title: config?.additionalInfo?.title || "Additional Info"
         },
         defaultLanguage: config?.defaultLanguage || s[s.length - 1],
-        amplifyNewlines: config?.amplifyNewlines ?? true
+        hardenNewlines: config?.hardenNewlines ?? true
     }
 
     function parseJSDOC(tag: denoDoc.JsDocTag){
@@ -312,11 +312,11 @@ export async function writeMarkdown(input: string,output: string,config?: Config
         else code += `\n\n${"## " + con.additionalInfo.title}\n\n${con.additionalInfo.content}`;
     }
 
-    code += "\n\n> **Documentation Generated with MarkDeno.**"
+    code += "\n\n> **Documentation Generated with [MarkDeno](https://deno.land/x/markdeno).**"
 
     Deno.writeFile(output,new TextEncoder().encode(
-        con.amplifyNewlines
-            ? amplifyNewlines(code + "\n")
+        con.hardenNewlines
+            ? hardenNewlines(code + "\n")
             : code + "\n"
     ));
 }
