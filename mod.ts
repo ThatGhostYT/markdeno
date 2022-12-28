@@ -39,7 +39,7 @@ export interface Config{
 
 /**
  * Returns a parsed version of the json object returned by `deno doc --json`
- * @param {string} input File to document.
+ * @param input File to document.
  * @returns {Promise<denoDoc.DocNode[]>}
  * @example
  * const json = await MarkDeno.getDocumentationJSON("file.ts");
@@ -57,8 +57,7 @@ export async function getDocumentationJSON(input: string): Promise<denoDoc.DocNo
 
 /**
  * Returns an unparsed version of the json object returned by `deno doc --json`
- * @param {string} input File to document.
- * @returns {Promise<string>}
+ * @param input File to document.
  * @example
  * const json = await MarkDeno.getDocumentationJSONString("file.ts");
  */
@@ -73,8 +72,7 @@ export async function getDocumentationJSONString(input: string){
 
 /**
  * Returns the result of `deno doc` without color. Note that `deno doc` does NOT return markdown.
- * @param {string} input File to document.
- * @returns {Promise<string>}
+ * @param input File to document.
  * @example
  * console.log(await MarkDeno.getDenoDocResult("file.ts"));
  */
@@ -89,8 +87,7 @@ export async function getDenoDocResult(input: string){
 
 /**
  * Amplifies new lines so that no new lines are ignored.
- * @param {string} markdown Markdown to amplify new lines in.
- * @returns {string}
+ * @param markdown Markdown to amplify new lines in.
  * @example
  * Deno.writeFile("output.md",hardenNewlines(`## Amplified Newlines
  * 
@@ -99,15 +96,14 @@ export async function getDenoDocResult(input: string){
  * `));
  */
 export function hardenNewlines(markdown: string){
-    return markdown.replace(/\n+/g,"  \n");
+    return markdown.replace(/\n/g,"  \n");
 }
 
 /**
  * Analyzes an input file and writes to a specified output file.
- * @param {string} input Input file to analyze.
- * @param {string} out Output file to write markdown too.
- * @param {Config} config Optional configurations for the parser.
- * @returns {Promise<void>}
+ * @param input Input file to analyze.
+ * @param out Output file to write markdown too.
+ * @param config Optional configurations for the parser.
  * @example
  * MarkDeno.writeMarkdown("file.ts","output.md");
  */
@@ -233,7 +229,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                     if(i.interfaceDef.extends.length !== inc) code += ",";
                 }
 
-                code += "\n"
+                code += "\n\n";
 
                 inc = 0;
                 for(const method of i.interfaceDef.methods){
@@ -253,7 +249,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
 
                     code += ")";
 
-                    if("jsDoc" in method && "doc" in method.jsDoc!) code += "\n\n" + method.jsDoc.doc;
+                    if("jsDoc" in method && "doc" in method.jsDoc!) code += "\n\n    " + method.jsDoc.doc;
                 
                     if("jsDoc" in method && "tags" in method.jsDoc! && method.jsDoc.tags!.length > 0){
                         for(const tag of method.jsDoc.tags!){
@@ -261,15 +257,15 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                         }
                     }
 
-                    if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
-                    if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n\n";
+                    if(con.displayOrigin) code += `\n\n    Declared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
+                    if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n";
                 }
 
                 for(const property of i.interfaceDef.properties){
                     inc++;
                     code += `- **${property.name}**: *${property.tsType?.repr || property.tsType?.kind}*`;
 
-                    if("jsDoc" in property && "doc" in property.jsDoc!) code += "\n\n" + property.jsDoc.doc;
+                    if("jsDoc" in property && "doc" in property.jsDoc!) code += "\n\n    " + property.jsDoc.doc;
                 
                     if("jsDoc" in property && "tags" in property.jsDoc! && property.jsDoc.tags!.length > 0){
                         for(const tag of property.jsDoc.tags!){
@@ -277,11 +273,10 @@ export async function writeMarkdown(input: string,output: string,config?: Config
                         }
                     }
 
-                    if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
-                    if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n\n";
+                    if(con.displayOrigin) code += `\n\n    Declared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
+                    if(i.interfaceDef.methods.length + i.interfaceDef.properties.length !== inc) code += "\n";
                 }
 
-                code += "\n";
                 break;
             }
 
@@ -303,8 +298,8 @@ export async function writeMarkdown(input: string,output: string,config?: Config
             }
         }
 
-        if(con.displayOrigin) code += `\n\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
-        if(json.length !== increment) code += "\n\n";
+        if(con.displayOrigin) code += `\nDeclared at: \`${input}:${i.location.line}:${i.location.col}\`\n`;
+        if(json.length !== increment) code += "\n";
     }
 
     if(con.additionalInfo.content){
@@ -312,7 +307,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
         else code += `\n\n${"## " + con.additionalInfo.title}\n\n${con.additionalInfo.content}`;
     }
 
-    code += "\n\n> **Documentation Generated with [MarkDeno](https://deno.land/x/markdeno).**"
+    code += "\n> **Documentation Generated with [MarkDeno](https://deno.land/x/markdeno).**"
 
     Deno.writeFile(output,new TextEncoder().encode(
         con.hardenNewlines
