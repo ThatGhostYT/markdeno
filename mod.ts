@@ -191,7 +191,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
         return res;
     }
 
-    let code = "## Documentation\n\n";
+    let code = "# Documentation\n\n";
     let increment = 0;
     for(const i of json){        
         increment++;

@@ -28,6 +28,15 @@ MarkDeno.writeMarkdown("input.ts","output.md");
 > **3.** \`variable\`
 > **4.** \`import\`
 
+## Utilizing the CLI
+
+First, run the following command in your terminal.
+\`\`\`
+deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno/cli.ts
+\`\`\`
+
+Now, run \`markdeno -h\` for a help menu on the cli.
+
 ## Important Links
 
 > **1.** [Deno doc type definitions](https://deno.land/x/deno_doc@0.51.0/lib/types.d.ts)
