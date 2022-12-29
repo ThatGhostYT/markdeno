@@ -18,22 +18,22 @@ await new Command()
         } else Deno.writeFile(output,new TextEncoder().encode(result));
     })
     .command("reinstall","Reinstalls the markdeno cli.")
-    .option("-v, --version <version:string>","Version to install, if not provided then it will install the most recent.")
-    .action(async ({version}) => {
-        if(!version){
+    .option("-r, --release <version:string>","Version to install, if not provided then it will install the most recent.")
+    .action(async ({release}) => {
+        if(!release){
             console.log("> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno/cli.ts");
 
             const p = Deno.run({
-                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",/*"https://deno.land/x/markdeno/cli.ts"*/"cli.ts"],
+                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f","https://deno.land/x/markdeno/cli.ts"],
                 stdout: "piped"
             });
 
             console.log(new TextDecoder().decode(await p.output()));
         } else{
-            console.log(`> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno@${version}/cli.ts`);
+            console.log(`> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno@${release}/cli.ts`);
 
             const p = Deno.run({
-                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",/*`https://deno.land/x/markdeno@${version}/cli.ts`*/"cli.ts"],
+                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",`https://deno.land/x/markdeno@${release}/cli.ts`],
                 stdout: "piped"
             });
 
