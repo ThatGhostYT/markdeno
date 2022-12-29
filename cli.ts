@@ -13,8 +13,42 @@ await new Command()
     .option("-o, --output <output:string>","Optional output to write to.")
     .action(async ({output},input) => {
         const result = await MarkDeno.getDenoDocResult(input);
-        if(output == undefined){
+        if(!output){
             console.log(result);
         } else Deno.writeFile(output,new TextEncoder().encode(result));
+    })
+    .command("reinstall","Reinstalls the markdeno cli.")
+    .option("-v, --version <version:string>","Version to install, if not provided then it will install the most recent.")
+    .action(async ({version}) => {
+        if(!version){
+            console.log("> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno/cli.ts");
+
+            const p = Deno.run({
+                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",/*"https://deno.land/x/markdeno/cli.ts"*/"cli.ts"],
+                stdout: "piped"
+            });
+
+            console.log(new TextDecoder().decode(await p.output()));
+        } else{
+            console.log(`> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno@${version}/cli.ts`);
+
+            const p = Deno.run({
+                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",/*`https://deno.land/x/markdeno@${version}/cli.ts`*/"cli.ts"],
+                stdout: "piped"
+            });
+
+            console.log(new TextDecoder().decode(await p.output()));
+        }
+    })
+    .command("uninstall","Uninstalls the markdeno cli.")
+    .action(async () => {
+        console.log("> deno uninstall markdeno");
+
+        const p = Deno.run({
+            cmd: ["deno","uninstall","markdeno"],
+            stdout: "piped"
+        });
+
+        console.log(new TextDecoder().decode(await p.output()));
     })
     .parse(Deno.args);
