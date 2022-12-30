@@ -43,10 +43,10 @@ await new Command()
 
             console.log(new TextDecoder().decode(await p.output()));
         } else{
-            console.log(`> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno@${release}/cli.ts`);
+            console.log(`> deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno@v${release}/cli.ts`);
 
             const p = Deno.run({
-                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",`https://deno.land/x/markdeno@${release}/cli.ts`],
+                cmd: ["deno","install","--allow-run","--allow-write","-n","markdeno","-f",`https://deno.land/x/markdeno@v${release}/cli.ts`],
                 stdout: "piped"
             });
 
