@@ -30,7 +30,7 @@ MarkDeno.writeMarkdown("input.ts","output.md");
 First, run the following command in your terminal.  
   
 ```sh  
-deno install --allow-run --allow-write -n markdeno -f https://deno.land/x/markdeno/cli.ts  
+deno install --allow-run --allow-write --allow-read -n markdeno -f https://deno.land/x/markdeno/cli.ts  
 ```  
   
 Now, run `markdeno -h` for a help menu on the cli.  
