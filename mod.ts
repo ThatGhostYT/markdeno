@@ -122,7 +122,7 @@ export async function writeMarkdown(input: string,output: string,config?: Config
         defaultLanguage: config?.defaultLanguage || s[s.length - 1],
         hardenNewlines: config?.hardenNewlines ?? true
     }
-
+    
     function parseJSDOC(tag: denoDoc.JsDocTag){
         let res = "";
         switch(tag.kind){
