@@ -3,7 +3,7 @@ import * as MarkDeno from "./mod.ts";
 
 await new Command()
     .name("markdeno")
-    .version("0.0.2")
+    .version("0.0.3")
     .description("Deno library to generate documentation markdown.")
     .command("doc <input:string> <output:string>","Generates markdown based on an input file.")
     .option("-c, --config <config:string>","Configuration file for documentation generation.")
@@ -34,10 +34,10 @@ await new Command()
     .option("-r, --release <release:string>","Release to install, if not provided then it will install the most recent one.")
     .action(async ({release}) => {
         if(!release){
-            console.log("> deno install --allow-run --allow-write --allow-read -n markdeno -f https://deno.land/x/markdeno/cli.ts");
+            console.log("> deno install --allow-run --allow-write --allow-read -n markdeno -rf https://deno.land/x/markdeno/cli.ts");
 
             const p = Deno.run({
-                cmd: ["deno","install","--allow-run","--allow-write","--allow-read","-n","markdeno","-f","https://deno.land/x/markdeno/cli.ts"],
+                cmd: ["deno","install","--allow-run","--allow-write","--allow-read","-n","markdeno","-rf","https://deno.land/x/markdeno/cli.ts"],
                 stdout: "piped"
             });
 

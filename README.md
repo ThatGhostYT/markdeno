@@ -30,10 +30,30 @@ MarkDeno.writeMarkdown("input.ts","output.md");
 First, run the following command in your terminal.  
   
 ```sh  
-deno install --allow-run --allow-write --allow-read -n markdeno -f https://deno.land/x/markdeno/cli.ts  
+deno install --allow-run --allow-write --allow-read -n markdeno -rf https://deno.land/x/markdeno/cli.ts  
 ```  
   
 Now, run `markdeno -h` for a help menu on the cli.  
+  
+## Installing a previous version  
+  
+You can either do it with the markdeno cli or with deno install  
+  
+Deno install:  
+  
+```sh  
+deno install --allow-run --allow-write --allow-read -n markdeno -rf https://deno.land/x/markdeno@v{VERSION}/cli.ts  
+```  
+  
+> **Note:** Older versions of markdeno do **not** have a cli.ts file. The oldest version with a cli is [0.2.0](https://deno.land/x/markdeno@v0.2.0).  
+  
+Reinstalling with markdeno cli:  
+  
+```sh  
+markdeno reinstall -r {VERSION}  
+```  
+  
+> **Note:** Version 0.2.0 reinstall command is a little different as the flag name is `-v` and not `-r`.  
   
 ## Important Links  
   
