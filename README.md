@@ -1,7 +1,9 @@
 # Markdeno  
   
 [![ci](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml/badge.svg)](https://github.com/ThatGhostYT/markdeno/actions/workflows/ci.yml)  
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)  
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)  
+[![Created By: Dylan Neiger](https://img.shields.io/badge/created%20by-ThatGhost-yellow)](https://github.com/ThatGhostYT)  
+[![Database: test](https://database.claydb.repl.co/test/badge)](https://claydb.repl.co)
   
 MarkDeno is a library that turns your code into markdown documentation.  
   
